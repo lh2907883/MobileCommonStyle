@@ -1,0 +1,323 @@
+<!doctype html>
+<html lang="zh" ng-app="app" ng-controller="global">
+  <head>
+    <meta charset="utf-8">
+    <meta name="renderer" content="webkit">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+    <!-- build:css(.) styles/vendor.css -->
+    <!-- bower:css -->
+    <link rel="stylesheet" href="scripts/lib/normalize.css/normalize.css" />
+    <link rel="stylesheet" href="scripts/lib/art-reactor/dist/art-reactor.min.css" />
+    <!-- endbower -->
+    <!-- endbuild -->
+    <!-- build:css(app) styles/main.css -->
+    <link rel="stylesheet" href="styles/animate.css" />
+    <link rel="stylesheet" href="styles/index.css">
+    <!-- endbuild -->
+    <script src="http://vplus.fdc.com.cn/weixinapi/home/GetToken/get_openid/?type=detail"></script>
+  </head>
+  <body ng-controller="ctrl">
+    <div id="page1" class="page">
+      <button id="userCenter" class="btn" ng-click="gotoUserCenter()">
+        <i class="ar ar-user-full text-bigger"></i> 个人中心
+      </button>
+      <div class="index-bg"></div>
+      <p id="ad">买房 卖房 租房 找房 一切尽在亿房</p>
+      <div class="entry-wrap">
+        <div class="entry cf">
+          <label my-Presseffect class="col-6 img img-cs" ng-click="redirect('sale.html')"></label>
+          <label my-Presseffect class="col-6 img img-qg" ng-click="redirect('buy.html')"></label>
+          <label my-Presseffect class="col-6 img img-cz" ng-click="redirect('lend.html')"></label>
+          <label my-Presseffect class="col-6 img img-qz" ng-click="redirect('borrow.html')"></label>
+          <div class="line-x"></div>
+          <div class="line-y"></div>
+        </div>
+      </div>
+    </div>
+    <form id="page2" class="page hide" role="form" w5c-form-validate="" novalidate name="validateLogin">
+      <div my-fullscreen="-88">
+        <div class="title bb">
+          <h1>登录</h1>
+          <i class="ar ar-angle-left left" ng-click="goto(1)"></i>
+        </div>
+        <div class="form-box" style="margin-top: 140px;">
+          <dl class="group">
+            <dt class="addon-box">
+              <i class="ar ar-phone"></i>
+            </dt>
+            <dd class="box">
+              <input type="text" placeHolder="请输入手机号" maxlength="11" name="tel" ng-model="entity.tel" required="" ng-pattern="/^13[0-9]{9}$|14[0-9]{9}|15[0-9]{9}$|18[0-9]{9}$/">
+            </dd>
+          </dl>
+          <dl class="group">
+            <dt class="addon-box">
+              <i class="ar ar-locked-full"></i>
+            </dt>
+            <dd class="box">
+              <input type="password" placeHolder="请输入密码">
+            </dd>
+          </dl>
+        </div>
+        <p class="text-info plr20 mt5">
+          客服电话: xxxx
+        </p>
+      </div>
+      <div class="layout pb20">
+        <p class="col-12 show-error">{{validateLogin.$errors[0]}}</p>
+        <div class="col-6">
+          <button type="button" class="btn btn-primary" style="width: 100%;" ng-click="goto(3)">注册账号</button>
+        </div>
+        <div class="col-6">
+          <button type="button" class="btn btn-warn" style="width: 100%;" w5c-form-submit="login()">登录</button>
+        </div>
+      </div>
+    </form>
+    <form id="page3" class="page hide" role="form" w5c-form-validate="" novalidate name="validateRegister">
+      <div my-fullscreen="-88">
+        <div class="title bb">
+          <h1>注册</h1>
+        </div>
+        <div class="form-box" style="margin-top: 20px;">
+          <dl class="group">
+            <dt class="addon-box">
+              <i class="ar ar-user-full"></i>
+            </dt>
+            <dd class="box">
+              <input type="text" placeHolder="请输入姓名" required="" ng-model="registInfo.UserName" ng-pattern="/^[\u4e00-\u9fa5]{1,4}$/" name="UserName">
+            </dd>
+          </dl>
+          <dl class="group">
+            <dt class="addon-box">
+              <i class="ar ar-phone"></i>
+            </dt>
+            <dd class="box">
+              <input type="text" placeHolder="请输入手机号" maxlength="11" name="UserPhone" ng-model="registInfo.UserPhone" required="" ng-pattern="/^13[0-9]{9}$|14[0-9]{9}|15[0-9]{9}$|18[0-9]{9}$/">
+            </dd>
+          </dl>
+          <dl class="group">
+            <dt class="addon-box">
+              <i class="ar ar-locked-full"></i>
+            </dt>
+            <dd class="box">
+              <input type="password" placeHolder="请输入密码" required="" ng-model="registInfo.Pwd" name="Pwd">
+            </dd>
+          </dl>
+          <dl class="group">
+            <dt class="addon-box">
+              <i class="ar ar-locked-full"></i>
+            </dt>
+            <dd class="box">
+              <input type="password" placeHolder="请再次输入密码" required="" w5c-repeat="Pwd" ng-model="registInfo.RepeatPwd" name="RepeatPwd">
+            </dd>
+          </dl>
+        </div>
+        <div class="text-normal cf plr20 mt5">
+          <span ng-click="registInfo.UserType=1"><i class="ar" ng-class="{'ar-checked-c': registInfo.UserType==1, 'ar-unchecked-c': registInfo.UserType!=1}"></i> 注册社区顾问</span>
+          <span ng-click="registInfo.UserType=2" class="f-r"><i class="ar" ng-class="{'ar-checked-c': registInfo.UserType==2, 'ar-unchecked-c': registInfo.UserType!=2}"></i> 注册客户经理</span>
+        </div>
+        <p class="text-info plr20 mt5">
+          请输入您的真实信息,您的个人资料将作为结佣的重要依据.
+        </p>
+      </div>
+      <div class="layout mb20">
+        <p class="col-12 show-error">{{validateRegister.$errors[0]}}</p>
+        <div class="col-6">
+          <button type="button" class="btn btn-primary" style="width: 100%;" ng-click="goto(1)">返回</button>
+        </div>
+        <div class="col-6">
+          <button type="button" class="btn btn-warn" style="width: 100%;" w5c-form-submit="registerNext()">下一步</button>
+        </div>
+      </div>
+    </form>
+    <div id="page4" class="page hide">
+      <div my-fullscreen="-88">
+        <div class="title bb">
+          <h1>请选择您所在的区域</h1>
+        </div>
+        <div class="layout mt20 mb20">
+          <div class="col-6">
+            <button ng-click="registInfo.RegionID=2" ng-class="{'btn-default': registInfo.RegionID!=2, 'btn-primary': registInfo.RegionID==2}" type="button" class="btn" style="width: 100%;">汉阳</button>
+          </div>
+          <div class="col-6">
+            <button ng-click="registInfo.RegionID=1" ng-class="{'btn-default': registInfo.RegionID!=1, 'btn-primary': registInfo.RegionID==1}" type="button" class="btn" style="width: 100%;">南湖中央花园</button>
+          </div>
+        </div>
+        <p class="text-normal plr20">
+          <span ng-click="a_isAgree=!a_isAgree"><i class="ar" ng-class="{'ar-checked-c': a_isAgree, 'ar-unchecked-c': !a_isAgree}"></i> 已阅读并同意</span>
+          <a href="protocol.html">《社区顾问注册协议》</a>
+        </p>
+        <p class="text-info plr20">
+          如果上述供选择街道中没有您所在的社区,则暂时不支持您注册
+        </p>
+      </div>
+      <div class="layout mb20">
+        <p class="col-12 show-error">{{errorMsg}}</p>
+        <div class="col-6">
+          <button type="button" class="btn btn-primary" style="width: 100%;" ng-click="goto(3)">上一步</button>
+        </div>
+        <div class="col-6">
+          <button type="button" class="btn btn-warn" style="width: 100%;" ng-click="register()">完成注册</button>
+        </div>
+      </div>
+    </div>
+    <div id="page5" class="page hide">
+      <div my-fullscreen="-54">
+        <div class="title bb">
+          <h1>请选择您的主营区域</h1>
+        </div>
+        <div class="layout mt20 mb20">
+          <div class="col-6">
+            <button ng-click="registInfo.RegionID=2" ng-class="{'btn-default': registInfo.RegionID!=2, 'btn-primary': registInfo.RegionID==2}" type="button" class="btn" style="width: 100%;">汉阳</button>
+          </div>
+          <div class="col-6">
+            <button ng-click="registInfo.RegionID=1" ng-class="{'btn-default': registInfo.RegionID!=1, 'btn-primary': registInfo.RegionID==1}" type="button" class="btn" style="width: 100%;">南湖中央花园</button>
+          </div>
+        </div>
+        <p class="text-info plr20">
+          完成注册后,需待公司审核通过后才能使用.
+        </p>
+      </div>
+      <div class="layout mb20">
+        <!-- <p class="col-12 text-error mb5">错误提示</p> -->
+        <div class="col-6">
+          <button type="button" class="btn btn-primary" style="width: 100%;" ng-click="goto(3)">上一步</button>
+        </div>
+        <div class="col-6">
+          <button type="button" class="btn btn-warn" style="width: 100%;" ng-click="register()">完成注册</button>
+        </div>
+      </div>
+    </div>
+    <div id="page6" class="page hide">
+      <div my-fullscreen="-74">
+        <header class="personal cf">
+          <img src="images/personal-bg.png" alt="" style="display:block;width:100%;height:76px;">
+          <div class="user-info">
+            <img ng-src="{{headimgurl}}" alt="用户头像" class="f-l">
+            <ul class="user-content f-l">
+              <li><span ng-bind="userInfo.UserName"></span><span class="tag tag-blue tag-zshy"></span></li>
+              <li style="margin-top:20px;" ng-bind="userInfo.RegionName"></li>
+            </ul>
+          </div>
+          <div class="subsidys cf bb ptb5 wbg">
+            <div class="subs-l">
+              <p>补助费合计</p>
+              <p><span class="text-wran" ng-bind="userInfo.PayableAmount"></span>元</p>
+            </div>
+            <div class="subs-r">
+              <a href="subsidys.html" style="color:#000;">
+                <p>已领补助费</p>
+                <p><span class="text-wran" ng-bind="userInfo.PaidAmount"></span>元</p>
+              </a>
+            </div>
+          </div>
+        </header>
+        <div class="mt10 form-user">
+          <dl class="cf">
+              <dt><i class="ar ar-user"></i><span>我的客户</span></dt>
+              <dd ng-click="redirect('myCustomer.html')">
+                <div class="f-r">
+                      <i class="ar ar-angle-right"></i>
+                </div>
+              </dd>
+            </dl>
+            <dl class="cf">
+              <dt><i class="ar ar-file"></i><span>帮助信息</span></dt>
+              <dd ng-click="redirect('help.html')">
+                <div class="f-r">
+                      <i class="ar ar-angle-right"></i>
+                </div>
+              </dd>
+            </dl>
+            <dl class="cf">
+              <dt><i class="ar ar-wrench"></i><span>修改密码</span></dt>
+              <dd>
+                <div class="f-r" ng-click="goto(7)">
+                      <i class="ar ar-angle-right"></i>
+                </div>
+              </dd>
+            </dl>
+            <dl class="cf">
+              <dt><i class="ar ar-phone"></i><span>客服电话：<a href="tel:02782754533">02782754533</a></span></dt>
+              <dd ng-click="phoneCall('02782754533')">
+                <div class="f-r">
+                      <i class="ar ar-angle-right"></i>
+                </div>
+              </dd>
+            </dl>
+        </div>
+      </div>
+
+      <div class="layout mt20 pb20">
+        <div class="col-12">
+          <button type="button" class="btn btn-primary" style="width: 100%;" ng-click="goto(1)">返回首页</button>
+        </div>
+      </div>
+    </div>
+    <form id="page7" class="page hide" role="form" w5c-form-validate="" novalidate name="validateModifyPwd">
+      <div my-fullscreen="-88">
+        <div class="title bb">
+          <h1>修改密码</h1>
+        </div>
+        <div class="form-box" style="margin-top: 20px;">
+          <dl class="group">
+            <dt class="addon-box">
+              <i class="ar ar-unlock-a"></i>
+            </dt>
+            <dd class="box">
+              <input type="password" placeHolder="请输入原始密码" required="" ng-model="Modify.OldPwd" name="oldPwd">
+            </dd>
+          </dl>
+          <dl class="group">
+            <dt class="addon-box">
+              <i class="ar ar-key-full"></i>
+            </dt>
+            <dd class="box">
+              <input type="password" placeHolder="请输入新密码" required="" ng-model="Modify.NewPwd" name="password">
+            </dd>
+          </dl>
+          <dl class="group">
+            <dt class="addon-box">
+              <i class="ar ar-key-full"></i>
+            </dt>
+            <dd class="box">
+              <input type="password" placeHolder="请再次输入新密码" required="" w5c-repeat="password" ng-model="Modify.repeatPassword" name="repeatPassword">
+            </dd>
+          </dl>
+        </div>
+      </div>
+      <div class="layout mb20">
+        <p class="col-12 show-error">{{validateModifyPwd.$errors[0] || errorMsg}}</p>
+        <div class="col-6">
+          <button type="button" class="btn btn-primary" style="width: 100%;" ng-click="goto(6)">返回</button>
+        </div>
+        <div class="col-6">
+          <button type="button" class="btn btn-warn" style="width: 100%;" w5c-form-submit="savePwd()">提交</button>
+        </div>
+      </div>
+    </form>
+
+    <my-loading ng-show="isLoading"></my-loading>
+    <!--[if lt IE 10]>
+      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+
+    <!-- <input type="text" style="width: 150px;"> -->
+    <!-- build:js(.) scripts/vendor.js -->
+    <!-- bower:js -->
+    <script src="scripts/lib/angular/angular.js"></script>
+    <script src="scripts/lib/angular-touch/angular-touch.js"></script>
+    <!-- endbower -->
+    <!-- endbuild -->
+
+    <!-- build:js({app}) scripts/main.js -->
+
+    <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+    <script src="scripts/lib/zeptojs/src/zepto.js"></script>
+    <script src="scripts/lib/angular/angular.min.js"></script>
+    <script src="scripts/lib/angular-w5c-validator/w5cValidator.js"></script>
+    <script src="scripts/module/server.js"></script>
+    <script src="scripts/module/global.js"></script>
+    <script src="scripts/index.js"></script>
+  </body>
+</html>

@@ -1,0 +1,190 @@
+@import "variables.less";
+@import "mixins.less";
+
+@import "parts/global.less";
+@import "parts/layout-col.less";
+@import "parts/button.less";
+@import "parts/title.less";
+@import "parts/form-box.less";
+
+
+.page{
+  bottom: 0;
+}
+.footer{
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+/**************************************首页***************************************/
+//首页背景
+#page1{
+  background: url("../images/index-bg.jpg") repeat-x;
+  background-size: auto 100%;
+}
+#ad{
+  .text-center;
+  .font-size(12);
+  font-weight: 700;
+  color: #3498db;
+  position: absolute;
+  width: 100%;
+  top: 43%;
+}
+//个人中心按钮
+#userCenter{
+  height: auto;
+  color: #fff;
+  background-color: #5dacdf;
+  padding: 4px;
+  margin: 10px;
+  .f-r;
+}
+.entry-wrap{
+  position: absolute;
+  bottom: 10px;
+  width: 100%;
+}
+.entry{
+  margin: 0 auto;
+  width: 220px;
+}
+.line-x{
+  position: absolute;
+  top: 50%;
+  width: 160px;
+  margin-left: 30px;
+  border-top: 1px solid #bbb;
+}
+.line-y{
+  position: absolute;
+  left: 50%;
+  height: 200px;
+  border-left: 1px solid #bbb;
+}
+
+.img{
+  height: 100px;
+}
+.img-cs{
+  background: url("../images/sprite.png") no-repeat -95px -256px;
+}
+.img-cs.press{
+  background: url("../images/sprite.png") no-repeat -195px -256px;
+}
+.img-qg{
+  background: url("../images/sprite.png") no-repeat 7px -256px;
+}
+.img-qg.press{
+  background: url("../images/sprite.png") no-repeat 7px -372px;
+}
+.img-cz{
+  background: url("../images/sprite.png") no-repeat -97px -381px;
+}
+.img-cz.press{
+  background: url("../images/sprite.png") no-repeat -197px -381px;
+}
+.img-qz{
+  background: url("../images/sprite.png") no-repeat 6px -155px;
+}
+.img-qz.press{
+  background: url("../images/sprite.png") no-repeat -94px -155px;
+}
+
+/**************************************登录***************************************/
+#page2{
+  background: url("../images/login_bg.png") no-repeat center 70px;
+}
+
+
+.index-bg{
+  margin: 15px auto 0 auto;
+  width: 283px;
+  height: 156px;
+  background:url("../images/sprite.png") no-repeat;
+}
+/**
+ * 高度480到649的时候，距底边10px，大于650时为30px
+ */
+@media (min-height: 650px){
+  .entry-wrap{
+    bottom: 30px;
+  }
+}
+
+
+/**************************************个人中心页***************************************/
+.personal{
+  width: 100%;
+}
+.user-info{
+  box-sizing: border-box;
+  height: 102px;
+  width:100%;
+  padding: 10px 20px;
+  background-color: #2c3f50;
+  img{
+    width:80px;
+    height: 80px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+}
+.user-content{
+  margin: 10px 0 0 10px;
+  list-style-type: none;
+  color: #ccc;
+  font-size: 14px;
+  line-height: 24px;
+  li:first-of-type{
+    font-size: 16px;
+    span{
+      margin-left: 10px;
+    }
+  }
+}
+.subsidys {
+  p{
+    font-size: 14px;
+    line-height: 28px;
+  }
+  .subs-l{
+    float:left;
+    padding-left: 40px;
+  }
+  .subs-r{
+    float:right;
+    padding-right: 40px;
+  }
+}
+
+.form-user{
+  background-color: #fff;
+  border-top: 1px solid #dddddd;
+  border-bottom: 1px solid #dddddd;
+  line-height: 40px;
+  dl{
+    border-bottom: 1px solid @border-color;
+    dt{
+      .f-l;
+    }
+    dd{
+      .f-r;
+    }
+  }
+  dl:last-of-type{
+    border-bottom: 0;
+  }
+  span {
+    font-size: 14px;
+    color: #333;
+  }
+  i{
+      font-size: 16px;
+      margin: 0 10px;
+      color: #666;
+  }
+}
+

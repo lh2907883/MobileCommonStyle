@@ -1,0 +1,133 @@
+/**
+ * form表单
+ */
+.form{
+  .wbg;
+  .bt;
+  .bb;
+  display: block;
+  dl{    
+    dt{
+      .f-l;
+      color: @fc-label;
+    }
+  }
+}
+/* 静态表单(不可输入) */
+.form-static{
+  padding-top: 10px;
+  padding-bottom: 10px;
+  dl{
+    margin: 0 20px;
+    line-height: 28px;
+    dd{
+      margin-left: 72px;
+    } 
+  }
+}
+/* 编辑表单(有输入) */
+.form-edit{
+  line-height: 40px;
+  dl{
+    margin: 0 10px;
+    dt{
+      .font-size(12);
+    }
+    dd{
+      margin-left: 62px;
+    } 
+  }
+  dl+dl{    
+    border-top: 1px solid @border-color;
+  }
+  .muti-input+dl{
+    border-top: 0;
+  }
+  /* 表单编辑框无边框 */
+  input[type="text"],
+  input[type="number"],
+  input[type="password"]{
+    border: 0;
+    text-align: right;
+  }
+  textarea{
+    display: block;
+    width: 100%;
+    border: 0;
+    padding: 8px 0;
+    line-height: 24px;
+  }
+  .muti-input{
+    div.box{
+      width: 10%;
+      border-bottom: 1px solid #ccc;
+    }
+  }
+  /* 文本,文本域输入 */
+  .input-box{
+    position: relative;
+    padding-right: 28px;
+    textarea,
+    input[type="text"],
+    input[type="number"],
+    input[type="password"]{
+      width: 100%;
+    }
+    .placeHold{
+      color: @fc-placeHolder;
+      position: absolute;
+      right: 28px;
+      top: 10px;
+      line-height: 20px;
+    }
+  }
+  .empty{
+    .button-remove;
+    right: 3px;
+    top: 12px;
+  }
+  /* 输入框组合 */
+  .group{
+    input[type="text"],
+    input[type="number"],
+    input[type="password"]{
+      display: table-cell;
+      width: 100%;
+    }
+  }
+  /* 带按钮的输入行 */
+  .button-row{
+    margin-right: 0;
+    button{
+      width: 40px;
+      height: auto;
+      padding: 0;
+      vertical-align: top;
+      i{
+        font-size:16px;
+      }
+    }
+  }
+}
+/* 输入框组合的右侧盒子 */
+.addon-box{
+  padding-left: 6px;
+  //文字显示
+  .label{
+    color: @fc-label;
+    white-space: nowrap;
+    .btn-select{
+      margin-left: 6px;
+      .font-size(16);
+    }
+  }
+  //隐藏的下拉框
+  select{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    opacity: 0;
+  }  
+}
+

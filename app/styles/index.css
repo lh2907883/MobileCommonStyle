@@ -1,0 +1,646 @@
+html {
+  -webkit-user-select: none;
+  /* 禁止选中文本（如无文本选中需求，此为必选项） */
+  user-select: none;
+  font-family: Helvetica, STHeiTi, sans-serif;
+  font-size: 10px;
+}
+body {
+  font-size: 14px;
+  font-size: 1.4rem;
+  background-color: #f5f5f5;
+}
+* {
+  box-sizing: border-box;
+  outline: none;
+  padding: 0;
+  margin: 0;
+}
+a,
+img {
+  -webkit-touch-callout: none;
+  /* 禁止长按链接与图片弹出菜单 */
+}
+a {
+  color: #428bca;
+  text-decoration: none;
+}
+dl {
+  margin: 0;
+  padding: 0;
+}
+textarea {
+  resize: none;
+}
+/* 去掉点击的高亮灰色背景 */
+* {
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+input:focus {
+  border: none;
+  background: none;
+}
+ul {
+  list-style-type: none;
+}
+.show {
+  display: block;
+}
+.hide {
+  display: none;
+}
+.f-l {
+  float: left;
+  display: inline-block;
+}
+.f-r {
+  float: right;
+  display: inline-block;
+}
+.cf:before,
+.cf:after {
+  content: "";
+  display: table;
+}
+.cf:after {
+  clear: both;
+}
+/**
+ * 模拟的控件
+ */
+.imitate {
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  position: absolute;
+}
+/**
+ * 细微布局调整
+ */
+.mt5 {
+  margin-top: 5px;
+}
+.mt10 {
+  margin-top: 10px;
+}
+.mt20 {
+  margin-top: 20px;
+}
+.mb5 {
+  margin-bottom: 5px;
+}
+.mb10 {
+  margin-bottom: 10px;
+}
+.mb20 {
+  margin-bottom: 20px;
+}
+.pb10 {
+  padding-bottom: 10px;
+}
+.pb20 {
+  padding-bottom: 20px;
+}
+.plr10 {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+.plr20 {
+  padding-left: 20px;
+  padding-right: 20px;
+}
+.ptb5 {
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+.mt20 {
+  margin-top: 20px;
+}
+/**
+ * 文字
+ */
+.text-info {
+  line-height: 24px;
+  font-size: 12px;
+  font-size: 1.2rem;
+  color: #999999;
+}
+.text-error {
+  line-height: 24px;
+  font-size: 12px;
+  font-size: 1.2rem;
+  color: #e74c3c;
+}
+.text-normal {
+  line-height: 28px;
+  font-size: 14px;
+  font-size: 1.4rem;
+  color: #333333;
+}
+.text-wran {
+  font-size: 16px;
+  font-size: 1.6rem;
+  color: #e74c3c;
+}
+.text-center {
+  text-align: center;
+}
+.text-right {
+  text-align: right;
+}
+/**
+ * 文字对齐样式
+ */
+.w2 {
+  letter-spacing: 2em;
+  margin-right: -2em;
+}
+.w3 {
+  letter-spacing: 0.5em;
+  margin-right: -0.5em;
+}
+.text-bigger {
+  font-size: 16px;
+  font-size: 1.6rem;
+}
+/**
+ * 其他公用样式
+ */
+.show-error {
+  line-height: 24px;
+  font-size: 12px;
+  font-size: 1.2rem;
+  color: #e74c3c;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  height: 34px;
+}
+.bt {
+  border-top: 1px solid #dddddd;
+}
+.bb {
+  border-bottom: 1px solid #dddddd;
+}
+.wbg {
+  background-color: #fff;
+}
+.co-primary {
+  color: #3498db;
+}
+.co-warn {
+  color: #e74c3c;
+}
+.co-inVal {
+  color: #cccccc;
+}
+.collapse {
+  visibility: collapse;
+}
+.page {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+}
+/* 组合(模拟table) */
+.group {
+  display: table;
+}
+.group .box {
+  display: table-cell;
+  width: 100%;
+}
+.group .addon-box {
+  position: relative;
+  display: table-cell;
+  white-space: nowrap;
+  vertical-align: middle;
+  width: 1%;
+}
+@-webkit-keyframes ui-dialog-loading {
+  0% {
+    -webkit-transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+  }
+}
+@keyframes ui-dialog-loading {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+/**
+ * 遮罩层
+ */
+.load-wrap {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 1998;
+}
+.load-wrap .shadow {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background-color: #000;
+  opacity: 0.4;
+}
+.load-wrap .loading {
+  vertical-align: middle;
+  position: absolute;
+  display: block;
+  overflow: hidden;
+  width: 32px;
+  height: 32px;
+  top: 50%;
+  left: 48%;
+  margin: -16px auto 0 auto;
+  font-size: 0;
+  text-indent: -999em;
+  color: #666;
+}
+.load-wrap .loading::after {
+  position: absolute;
+  content: '';
+  width: 3px;
+  height: 3px;
+  margin: 14.5px 0 0 14.5px;
+  border-radius: 100%;
+  box-shadow: 0 -10px 0 1px #ffffff, 10px 0px #ffffff, 0 10px #ffffff, -10px 0 #ffffff, -7px -7px 0 0.5px #ffffff, 7px -7px 0 1.5px #ffffff, 7px 7px #ffffff, -7px 7px #ffffff;
+  -webkit-transform: rotate(360deg);
+  -webkit-animation: ui-dialog-loading 1.5s infinite linear;
+  transform: rotate(360deg);
+  animation: ui-dialog-loading 1.5s infinite linear;
+}
+/**
+ * 选择房间
+ */
+.select-room {
+  text-align: center;
+}
+.select-room button {
+  width: 60px;
+  margin: 20px 5px;
+}
+/**
+ * 简化的栅格布局(按照等分12列布局)
+ */
+.layout {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+.layout .col-12,
+.layout .col-6,
+.layout .col-4,
+.layout .col-3,
+.layout .col-2,
+.layout .col-1 {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+.layout:before,
+.layout:after {
+  content: "";
+  display: table;
+}
+.layout:after {
+  clear: both;
+}
+.col-12,
+.col-6,
+.col-4,
+.col-3,
+.col-2,
+.col-1 {
+  float: left;
+  display: inline-block;
+  box-sizing: border-box;
+}
+.col-12 {
+  width: 100%;
+}
+.col-6 {
+  width: 50%;
+}
+.col-4 {
+  width: 33.3%;
+}
+.col-3 {
+  width: 25%;
+}
+.col-2 {
+  width: 16.66%;
+}
+.col-1 {
+  width: 8.33%;
+}
+@media (min-width: 370px) {
+  .col-l-12,
+  .col-l-6,
+  .col-l-4,
+  .col-l-3,
+  .col-l-2,
+  .col-l-1 {
+    float: left;
+    display: inline-block;
+    box-sizing: border-box;
+  }
+  .col-l-12 {
+    width: 100%;
+  }
+  .col-l-6 {
+    width: 50%;
+  }
+  .col-l-4 {
+    width: 33.3%;
+  }
+  .col-l-3 {
+    width: 25%;
+  }
+  .col-l-2 {
+    width: 16.66%;
+  }
+  .col-l-1 {
+    width: 8.33%;
+  }
+}
+/**
+ * 按钮样式
+ */
+.btn {
+  border: 1px solid transparent;
+  border-radius: 2px;
+  vertical-align: middle;
+  text-align: center;
+  display: inline-block;
+  white-space: nowrap;
+  padding: 6px 12px;
+  height: 34px;
+}
+.btn-default {
+  color: #666666;
+  border-color: #dddddd;
+  background-color: #fff;
+}
+.btn-primary {
+  color: #ffffff;
+  background-color: #3498db;
+}
+.btn-warn {
+  color: #ffffff;
+  background-color: #e74c3c;
+}
+.btn-inVal {
+  color: #ffffff;
+  background-color: #cccccc;
+}
+/**
+ * 按钮扁平化
+ */
+.flat .btn {
+  border: 0;
+  border-radius: 0;
+}
+/**
+ * 圆形删除按钮
+ */
+.button-remove {
+  display: block;
+  border: 1px solid transparent;
+  border-radius: 12px;
+  background-color: #ccc;
+  color: #fff;
+  padding: 4px;
+  cursor: pointer;
+  font-size: 6px;
+  position: absolute;
+}
+/**
+ * 标题
+ */
+.title {
+  /*标题的左右图标*/
+  text-align: center;
+  height: 44px;
+  line-height: 44px;
+  background-color: #fff;
+}
+.title h1 {
+  display: inline;
+  font-size: 16px;
+  font-size: 1.6rem;
+}
+.title .left {
+  position: absolute;
+  left: 0;
+}
+.title .right {
+  position: absolute;
+  right: 0;
+}
+.title i {
+  padding: 14px 10px;
+  font-size: 16px;
+  font-size: 1.6rem;
+}
+/**
+ * form表单(登录盒子)
+ */
+.form-box {
+  background-color: #fff;
+  border: 1px solid #dddddd;
+  margin-left: 20px;
+  margin-right: 20px;
+}
+.form-box dt {
+  padding: 8px 12px;
+}
+.form-box dd {
+  padding: 12px 8px 12px 0;
+}
+.form-box dl + dl {
+  border-top: 1px solid #dddddd;
+}
+.form-box input[type="text"],
+.form-box input[type="password"] {
+  border: 0;
+}
+.page {
+  bottom: 0;
+}
+.footer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+/**************************************首页***************************************/
+#page1 {
+  background: url("../images/index-bg.jpg") repeat-x;
+  background-size: auto 100%;
+}
+#ad {
+  text-align: center;
+  font-size: 12px;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #3498db;
+  position: absolute;
+  width: 100%;
+  top: 43%;
+}
+#userCenter {
+  height: auto;
+  color: #fff;
+  background-color: #5dacdf;
+  padding: 4px;
+  margin: 10px;
+  float: right;
+  display: inline-block;
+}
+.entry-wrap {
+  position: absolute;
+  bottom: 10px;
+  width: 100%;
+}
+.entry {
+  margin: 0 auto;
+  width: 220px;
+}
+.line-x {
+  position: absolute;
+  top: 50%;
+  width: 160px;
+  margin-left: 30px;
+  border-top: 1px solid #bbb;
+}
+.line-y {
+  position: absolute;
+  left: 50%;
+  height: 200px;
+  border-left: 1px solid #bbb;
+}
+.img {
+  height: 100px;
+}
+.img-cs {
+  background: url("../images/sprite.png") no-repeat -95px -256px;
+}
+.img-cs.press {
+  background: url("../images/sprite.png") no-repeat -195px -256px;
+}
+.img-qg {
+  background: url("../images/sprite.png") no-repeat 7px -256px;
+}
+.img-qg.press {
+  background: url("../images/sprite.png") no-repeat 7px -372px;
+}
+.img-cz {
+  background: url("../images/sprite.png") no-repeat -97px -381px;
+}
+.img-cz.press {
+  background: url("../images/sprite.png") no-repeat -197px -381px;
+}
+.img-qz {
+  background: url("../images/sprite.png") no-repeat 6px -155px;
+}
+.img-qz.press {
+  background: url("../images/sprite.png") no-repeat -94px -155px;
+}
+/**************************************登录***************************************/
+#page2 {
+  background: url("../images/login_bg.png") no-repeat center 70px;
+}
+.index-bg {
+  margin: 15px auto 0 auto;
+  width: 283px;
+  height: 156px;
+  background: url("../images/sprite.png") no-repeat;
+}
+/**
+ * 高度480到649的时候，距底边10px，大于650时为30px
+ */
+@media (min-height: 650px) {
+  .entry-wrap {
+    bottom: 30px;
+  }
+}
+/**************************************个人中心页***************************************/
+.personal {
+  width: 100%;
+}
+.user-info {
+  box-sizing: border-box;
+  height: 102px;
+  width: 100%;
+  padding: 10px 20px;
+  background-color: #2c3f50;
+}
+.user-info img {
+  width: 80px;
+  height: 80px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+.user-content {
+  margin: 10px 0 0 10px;
+  list-style-type: none;
+  color: #ccc;
+  font-size: 14px;
+  line-height: 24px;
+}
+.user-content li:first-of-type {
+  font-size: 16px;
+}
+.user-content li:first-of-type span {
+  margin-left: 10px;
+}
+.subsidys p {
+  font-size: 14px;
+  line-height: 28px;
+}
+.subsidys .subs-l {
+  float: left;
+  padding-left: 40px;
+}
+.subsidys .subs-r {
+  float: right;
+  padding-right: 40px;
+}
+.form-user {
+  background-color: #fff;
+  border-top: 1px solid #dddddd;
+  border-bottom: 1px solid #dddddd;
+  line-height: 40px;
+}
+.form-user dl {
+  border-bottom: 1px solid #dddddd;
+}
+.form-user dl dt {
+  float: left;
+  display: inline-block;
+}
+.form-user dl dd {
+  float: right;
+  display: inline-block;
+}
+.form-user dl:last-of-type {
+  border-bottom: 0;
+}
+.form-user span {
+  font-size: 14px;
+  color: #333;
+}
+.form-user i {
+  font-size: 16px;
+  margin: 0 10px;
+  color: #666;
+}

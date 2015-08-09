@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="zh" ng-app="app" ng-controller="global">
+<head>
+  <meta charset="UTF-8">
+  <title>提交信息成功</title>
+  <meta name="renderer" content="webkit">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+  <link rel="shortcut icon" href="/favicon.ico">
+  <link rel="stylesheet" href="scripts/lib/normalize.css/normalize.css" />
+  <link rel="stylesheet" href="scripts/lib/art-reactor/dist/art-reactor.min.css" />
+  <link rel="stylesheet" href="styles/common.css">
+  <link rel="stylesheet" href="styles/style.css">
+  <script src="http://vplus.fdc.com.cn/weixinapi/home/GetToken/get_openid/?type=detail"></script>
+</head>
+<body ng-controller="ctrl">
+  <div my-fullscreen="-112">
+    <section class="bg-img">
+      <p>亿房·社区顾问</p>
+      <p>恭喜！您的信息提交成功了！</p>
+    </section>
+    <div class="panel">
+      <p class="text-normal">
+        信息获得亿房确认后，您将得到
+        <span class="text-wran" ng-bind="InfoFee"></span>
+        元的信息补助费。
+      </p>
+      <p class="text-normal">
+        您提交的是出售房源客户信息，如果在亿房成交，您还将获得
+        <span class="text-wran" ng-bind="CommitFee"></span>
+        元的成交补助费。
+      </p>
+    </div>
+  </div>
+  <div class="layout pb20">
+    <p class="col-12 text-info ptb5">出租房源、求购客户以及求租客户的信息补助费需待房源、客源在亿房成交后发放。</p>
+    <div class="col-12">
+      <button type="button" class="btn btn-warn" style="width: 100%;font-size:14px;" ng-click="confirm()">确认成交</button>
+    </div>
+  </div>
+  <my-loading ng-show="isLoading"></my-loading>
+
+  <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+  <script src="scripts/lib/angular/angular.min.js"></script>
+  <script src="scripts/module/server.js"></script>
+  <script src="scripts/module/global.js"></script>
+  <!-- endbuild -->
+  <script src="scripts/subSuccess.js"></script>
+</body>
+</html>

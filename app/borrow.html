@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="zh" ng-app="app" ng-controller="global" ng-init="userType=1;">
+<head>
+  <meta charset="UTF-8">
+  <title>租房客户提交</title>
+  <meta name="renderer" content="webkit">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+  <link rel="shortcut icon" href="/favicon.ico">
+  <link rel="stylesheet" href="scripts/lib/normalize.css/normalize.css" />
+  <link rel="stylesheet" href="scripts/lib/art-reactor/dist/art-reactor.min.css" />
+  <link rel="stylesheet" href="styles/animate.css" />
+  <link rel="stylesheet" href="styles/common.css">
+  <script src="http://vplus.fdc.com.cn/weixinapi/home/GetToken/get_openid/?type=detail"></script>
+</head>
+<body ng-controller="ctrl">
+  <form id="page1" class="page" role="form" w5c-form-validate="vm.validateOptions" novalidate name="step1">
+    <div my-fullscreen="-88">
+      <div class="title">
+        <h1>租房客户提交</h1>
+      </div>
+
+      <div class="form form-edit form-except">
+        <dl class="cf">
+          <dt>客户姓名</dt>
+          <dd>
+            <div class="input-box">
+              <input type="text" placeholder="请输入客户姓名" value="" required="" ng-model="entity.CustName" ng-pattern="/^[\u4e00-\u9fa5]{1,4}$/" name="username"> <i class="ar ar-cancel empty" ng-show="isNotEmpty('step1', 'username')" ng-click="entity.CustName=''"></i>
+            </div>
+          </dd>
+        </dl>
+        <dl class="cf">
+          <dt>客户手机</dt>
+          <dd>
+            <div class="input-box">
+              <input type="text" placeholder="请输入购房客户的手机号" value="" name="tel" ng-model="entity.CustPhone" required="" ng-pattern="/^13[0-9]{9}$|14[0-9]{9}|15[0-9]{9}$|18[0-9]{9}$/"> <i class="ar ar-cancel empty" ng-show="isNotEmpty('step1', 'tel')" ng-click="entity.CustPhone=''"></i>
+            </div>
+          </dd>
+        </dl>
+        <dl class="cf">
+          <dt>期望租金</dt>
+          <dd>
+            <div class="group">
+              <input ng-model="entity.Price" name="price" required="" type="text" placeholder="期望租金" readonly="true">
+              <div class="addon-box">
+                <div class="label">
+                  元/月 <i class="ar ar-angle-right btn-select"></i>
+                </div>
+                <select ng-model="entity.Price" style="position: absolute;width: 100%;height: 100%;top: 0;opacity: 0;">
+                  <option value="">-- 请选择期望租金 --</option>
+                  <option>500元以下</option>
+                  <option>500～1000</option>
+                  <option>1000～1500</option>
+                  <option>1500～3000</option>
+                  <option>3000元以上</option>
+                </select>
+              </div>
+            </div>
+          </dd>
+        </dl>
+      </div>
+      <div class="select-room">
+        <button type="button" class="btn btn-default" ng-click="room='1'" ng-class="{'btn-default': room!='1', 'btn-primary': room=='1'}">一房</button>
+        <button type="button" class="btn btn-default" ng-click="room='2'" ng-class="{'btn-default': room!='2', 'btn-primary': room=='2'}">二房</button>
+        <button type="button" class="btn btn-default" ng-click="room='3'" ng-class="{'btn-default': room!='3', 'btn-primary': room=='3'}">三房</button>
+        <button type="button" class="btn btn-default" ng-click="room='4'" ng-class="{'btn-default': room!='4', 'btn-primary': room=='4'}">四房</button>
+      </div>
+    </div>
+    <div class="layout mb20">
+      <p class="col-12 show-error" ng-class="{collapse: step1.$errors.length == 0}" ng-bind="step1.$errors[0]"></p>
+      <div class="col-6">
+        <a href="index.html" class="btn btn-primary" style="width: 100%;color:#fff;">返回</a>
+      </div>
+      <div class="col-6">
+        <button type="button" class="btn btn-warn" style="width: 100%;" w5c-form-submit="vm.saveEntityPage1()">下一步</button>
+      </div>
+    </div>
+  </form>
+
+  <form id="page2" class="page hide" w5c-form-validate="vm.validateOptions" novalidate name="validateForm2">
+    <div my-fullscreen="-88">
+      <div class="title">
+        <h1>请选择您的租房区域</h1>
+      </div>
+
+      <div class="layout mb20" style="padding-top: 20px;border-top: 1px solid #ddd;">
+        <div class="col-6">
+          <button type="button" class="btn btn-default" style="width: 100%;" ng-click="vm.getDistrict(1)" ng-class="{'btn-default': a_area!='1', 'btn-primary': a_area=='1'}">汉阳</button>
+        </div>
+        <div class="col-6">
+          <button type="button" class="btn" style="width: 100%;" ng-click="vm.getDistrict(2)" ng-class="{'btn-default':a_area!='2','btn-primary':a_area=='2'}">南湖中央花园</button>
+        </div>
+      </div>
+
+      <div class="form form-edit form-except">
+        <dl class="cf">
+          <dt>街道</dt>
+          <dd>
+            <div class="group">
+              <input type="text" placeholder="请输入期望租房街道(可选填)" readonly="true" ng-model="district.Name">
+              <div class="addon-box">
+                <div class="label">
+                  <i class="ar ar-angle-right btn-select"></i>
+                </div>
+                <select class="imitate" ng-options="item.Name for item in District" ng-model="district">
+                  <option value="">--请输入期望租房街道--</option>
+                </select>
+              </div>
+            </div>
+          </dd>
+        </dl>
+        <dl class="cf">
+          <dt>租房需求</dt>
+          <dd>
+            <div class="input-box">
+              <input type="text" placeholder="请输入租房需求(可选填)" value="" name="demand" ng-model="entity.Describe" ng-pattern="/^[\S ]{1,30}$/"></div>
+          </dd>
+        </dl>
+      </div>
+    </div>
+
+    <div class="layout mb20">
+      <p class="col-12 show-error" ng-class="{collapse: validateForm2.$errors.length == 0}" ng-bind="validateForm2.$errors[0]"></p>
+      <div class="col-6">
+        <button ng-click="back()" type="button" class="btn btn-primary" style="width: 100%;">上一步</button>
+      </div>
+      <div class="col-6">
+        <button type="button" class="btn btn-warn" style="width: 100%;" w5c-form-submit="vm.saveEntityPage2()">提交</button>
+      </div>
+    </div>
+  </form>
+  <my-loading ng-show="isLoading"></my-loading>
+
+  <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+  <script src="scripts/lib/zeptojs/src/zepto.js"></script>
+  <script src="scripts/lib/angular/angular.min.js"></script>
+  <script src="scripts/lib/angular-w5c-validator/w5cValidator.js"></script>
+  <script src="scripts/module/server.js"></script>
+  <script src="scripts/module/global.js"></script>
+  <!-- endbuild -->
+  <script src="scripts/borrow.js"></script>
+</body>
+</html>

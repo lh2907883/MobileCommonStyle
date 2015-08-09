@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="zh" ng-app="app" ng-controller="global" ng-init="userType=1;">
+<head>
+  <meta charset="UTF-8">
+  <title>补助发放记录</title>
+  <meta name="renderer" content="webkit">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+  <link rel="shortcut icon" href="/favicon.ico">
+  <link rel="stylesheet" href="scripts/lib/normalize.css/normalize.css" />
+  <link rel="stylesheet" href="scripts/lib/art-reactor/dist/art-reactor.min.css" />
+  <link rel="stylesheet" href="styles/common.css">
+  <link rel="stylesheet" href="styles/style.css">
+  <script src="http://vplus.fdc.com.cn/weixinapi/home/GetToken/get_openid/?type=detail"></script>
+
+</head>
+<body ng-controller="ctrl">
+<div class="title">
+  <h1>补助发放记录</h1>
+</div>
+<div id="listBody" class="subs-list">
+  <div class="content-panel text-normal mb10 list-item" ng-repeat="ent in list">
+    <p>
+      补助发放金额：
+      <span class="text-wran" ng-bind="ent.PayMoney"></span>
+      元
+    </p>
+    <p>
+      流水编号：
+      <span ng-bind="ent.RecNO"></span>
+    </p>
+    <p>
+      发放日期：
+      <span ng-bind="ent.CreateTime | getDate  | date:'yyyy-MM-dd'"></span>
+    </p>
+    <p>
+      发放途径：
+      <span ng-bind="ent.PayName"></span>
+    </p>
+  </div>
+</div>
+<div class="layout mb20 mt20">
+  <div class="col-12">
+    <a href="myCustomer.html" class="btn btn-warn" style="width: 100%;font-size:14px;color:#fff;">确认</a>
+  </div>
+</div>
+
+<my-loading ng-show="isLoading"></my-loading>
+
+<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+  <script src="scripts/lib/zeptojs/src/zepto.js"></script>
+  <script src="scripts/lib/angular/angular.min.js"></script>
+  <script src="scripts/module/lazyload.js"></script>
+  <script src="scripts/module/server.js"></script>
+  <script src="scripts/module/global.js"></script>
+  <!-- endbuild -->
+  <script src="scripts/subsidys.js"></script>
+</body>
+</html>

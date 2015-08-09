@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="zh" ng-app="app" ng-controller="global" ng-init="userType=2;">
+<head>
+  <meta charset="UTF-8">
+  <title>求租客户详情</title>
+  <meta name="renderer" content="webkit">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+  <link rel="shortcut icon" href="/favicon.ico">
+  <link rel="stylesheet" href="scripts/lib/normalize.css/normalize.css" />
+  <link rel="stylesheet" href="scripts/lib/art-reactor/dist/art-reactor.min.css" />
+  <link rel="stylesheet" href="styles/common.css">
+  <link rel="stylesheet" href="styles/animate.css">
+  <script src="http://vplus.fdc.com.cn/weixinapi/home/GetToken/get_openid/?type=detail"></script></head>
+<body ng-controller="ctrl" ng-init="pIndex=1">
+  <div id="page1" class="page">  
+    <div my-fullscreen = "-74">
+      <div class="title cf">
+        <h1>求租客户详情</h1> 
+        <i class="ar ar-angle-left f-l" ng-click="back()"></i> 
+        <i class="ar ar-file-edit f-r" ng-click="edit()" ng-show="entity.StatusID==10"></i>
+      </div>
+      
+      <div class="content-panel group mb10">
+        <div class="box">
+          <dl class="cf">
+            <dt>客户姓名：</dt>
+            <dd ng-bind="entity.CustName"></dd>
+          </dl>
+          <dl class="cf">
+            <dt>客户状态：</dt>
+            <dd>
+              <span class="tag" ng-class="entity.StatusID | getStatusClass:'tag':'tagM'"></span>
+            </dd>
+          </dl>
+        </div>
+        <div class="addon-box phone" ng-click="phoneCall(entity.CustPhone)">
+          <i class="ar ar-phone-c co-primary"></i>
+        </div>
+      </div>
+
+      <div class="form form-static">
+        <dl class="cf">
+          <dt>期望区域：</dt>
+          <dd ng-bind="entity.RegionName"></dd>
+        </dl>
+        <dl class="cf">
+          <dt>期望街道：</dt>
+          <dd ng-bind="entity.DistrictName"></dd>
+        </dl>
+        <dl class="cf">
+          <dt>期望户型：</dt>
+          <dd>
+            <span ng-show="entity.Rooms"><span ng-bind="entity.Rooms"></span>房</span>
+            <span ng-show="entity.Hall"><span ng-bind="entity.Hall"></span>厅</span>
+            <span ng-show="entity.Toilet"><span ng-bind="entity.Toilet"></span>卫</span>
+          </dd>
+        </dl>
+        <dl class="cf">
+          <dt>期望租金：</dt>
+          <dd><span ng-bind="entity.Price"></span>元/月</dd>
+        </dl>
+        <dl class="cf">
+          <dt>房屋设施：</dt>
+          <dd ng-bind="entity.HouseEquipments"></dd>
+        </dl>
+        <dl class="cf">
+          <dt>其他需求：</dt>
+          <dd ng-bind="entity.Describe"></dd>
+        </dl>
+      </div>
+    </div>
+
+    <div class="layout mt20 mb20" ng-show="entity.StatusID==10">
+      <div class="col-6">
+        <button type="button" class="btn btn-inVal" style="width: 100%;" ng-click="updateStatus(30)">确认无效</button>
+      </div>
+      <div class="col-6">
+        <button type="button" class="btn btn-warn" style="width: 100%;" ng-click="updateStatus(40)">确认成交</button>
+      </div>
+    </div>
+  </div>
+
+  <form id="page2" class="page hide" role="form" w5c-form-validate="vm.validateOptions" novalidate name="step">
+    <div my-fullscreen = "-88">
+      <div class="title" style="position:relative;">
+        <i class="ar ar-angle-left" style="position: absolute;left: 0;color:#666;" ng-click="pre()"></i>
+        <h1>完善求租客户</h1>
+      </div>
+
+      <div class="form form-edit">
+        <dl class="cf">
+          <dt>客户姓名</dt>
+          <dd>
+            <div class="input-box ">
+              <input type="text" placeholder="请输入客户姓名" required="" ng-model="copyEntity.CustName" ng-pattern="/^[\u4e00-\u9fa5]{1,4}$/" name="username">
+              <i class="ar ar-cancel empty" ng-show="isNotEmpty('step', 'username')" ng-click="copyEntity.CustName=''"></i>
+            </div>
+          </dd>
+        </dl>
+        <dl class="cf">
+          <dt>客户手机</dt>
+          <dd>
+            <div class="input-box ">
+              <input type="text" placeholder="请输入客户手机" name="tel" ng-model="copyEntity.CustPhone" required="" ng-pattern="/^13[0-9]{9}$|14[0-9]{9}|15[0-9]{9}$|18[0-9]{9}$/">
+              <i class="ar ar-cancel empty" ng-show="isNotEmpty('step', 'tel')" ng-click="copyEntity.CustPhone=''"></i>
+            </div>
+          </dd>
+        </dl>
+        <dl class="cf">
+          <dt>期望区域</dt>
+          <dd>
+            <div class="group">
+              <input ng-model="copyEntity.RegionName" type="text" placeholder="期望区域" name="region" required="" readonly>
+              <div class="addon-box">
+                <div class="label">
+                  <i class="ar ar-angle-right btn-select"></i>
+                </div>
+                <select ng-model="copyEntity.RegionID" class="imitate" ng-change="regionChanged()">
+                  <option value="">--请选择期望区域--</option>
+                  <option value="2">汉阳</option>
+                  <option value="1">南湖中央花园</option>
+                </select>
+              </div>
+            </div>
+          </dd>
+        </dl>
+        <dl class="cf">
+          <dt>期望街道</dt>
+          <dd>
+            <div class="group">
+              <input type="text" name="district" placeholder="请输入期望租房街道(可选填)" readonly="true" ng-model="copyEntity.DistrictName">
+              <div class="addon-box">
+                <div class="label">
+                  <i class="ar ar-angle-right btn-select"></i>
+                </div>
+                <select class="imitate" ng-options="item.ID as item.Name for item in District" ng-model="copyEntity.District" ng-change="districtChanged()">
+                  <option value="">--请输入期望租房街道--</option>
+                </select>
+              </div>
+            </div>
+          </dd>
+        </dl>
+        <dl class="cf">
+          <dt>期望租金</dt>
+          <dd>
+            <div class="group">
+              <input ng-model="copyEntity.Price" type="text" placeholder="期望租金" value="" name="price" required="" readonly>
+              <div class="addon-box">
+                <div class="label">
+                  <span class="label">元/月</span>
+                  <i class="ar ar-angle-right btn-select"></i>
+                </div>
+                <select ng-model="copyEntity.Price" style="position: absolute;width: 100%;height: 100%;top: 0;opacity: 0;">
+                  <option value="">--请选择期望租金--</option>
+                  <option>500元以下</option>
+                  <option>500～1000</option>
+                  <option>1000～1500</option>
+                  <option>1500～3000</option>
+                  <option>3000元以上</option>
+                </select>
+              </div>
+            </div>
+          </dd>
+        </dl>
+        <dl class="cf">
+          <dt>设施要求</dt>
+          <dd>
+            <div class="input-box ">
+              <input type="text" placeholder="设施要求" ng-model="copyEntity.HouseEquipments" name="houseEquipments">
+              <i class="ar ar-cancel empty" ng-show="isNotEmpty('step', 'houseEquipments')" ng-click="copyEntity.HouseEquipments=''"></i>
+            </div>
+          </dd>
+          <!-- <dd>
+            <div class="group">
+              <input type="text" placeholder="设施要求">
+              <div class="addon-box">
+                <div class="label">
+                  <i class="ar ar-angle-right btn-select"></i>
+                </div>
+                <select style="position: absolute;width: 100%;height: 100%;top: 0;opacity: 0;">
+                  <option>1</option>
+                  <option>2</option>
+                  <option>3</option>
+                </select>
+              </div>
+            </div>
+          </dd> -->
+        </dl>
+        <dl class="cf muti-input">
+          <dt>户型：</dt>
+          <dd>
+            <div class="input-box ">
+              <div class="group">
+                <div class="box">
+                  <input type="number" name="rooms" required="" ng-model="copyEntity.Rooms" ng-pattern="/^[0-9]$/">
+                </div>
+                <span class="addon-box">房</span>
+                <div class="box">
+                  <input type="number" name="parlor" ng-model="copyEntity.Hall" ng-pattern="/^[0-9]$/">
+                </div>
+                <span class="addon-box">厅</span>
+                <div class="box">
+                  <input type="number" name="bashroom" ng-model="copyEntity.Toilet" ng-pattern="/^[0-9]$/">
+                </div>
+                <span class="addon-box">卫</span>
+              </div>
+              <i class="ar ar-cancel empty" ng-show="isNotEmpty('step', 'rooms') || isNotEmpty('step', 'parlor')  || isNotEmpty('step', 'bashroom')" ng-click="copyEntity.Rooms=''; copyEntity.Hall=''; copyEntity.Toilet=''"></i>
+            </div>
+          </dd>
+        </dl>
+        <dl class="cf">
+          <dt>其他需求</dt>
+          <dd>
+            <div class="input-box">
+              <textarea rows="2" name="demand" ng-model="copyEntity.Describe" ng-pattern="/^[\S ]{1,30}$/"></textarea>
+              <i class="ar ar-cancel empty" ng-show="isNotEmpty('step', 'demand')" ng-click="copyEntity.Describe=''"></i>
+            </div>
+          </dd>
+        </dl>
+      </div>
+    </div>
+    <div class="layout mb20">
+      <p class="col-12 show-error" ng-class="{collapse: step1.$errors.length == 0}">{{step.$errors[0]}}</p>
+      <div class="col-12">
+        <button type="button" class="btn btn-warn" style="width: 100%;" w5c-form-submit="sub()">提交</button>
+      </div>
+    </div>
+  </form>
+
+  <my-loading ng-show="isLoading"></my-loading>
+
+  <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+  <script src="scripts/lib/zeptojs/src/zepto.js"></script>
+  <script src="scripts/lib/angular/angular.min.js"></script>
+  <script src="scripts/lib/angular-w5c-validator/w5cValidator.js"></script>
+  <script src="scripts/module/server.js"></script>
+  <script src="scripts/module/global.js"></script>
+  <!-- endbuild -->
+  <script src="scripts/borrowDetailM.js"></script>
+</body>
+</html>

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="zh" ng-app="app" ng-controller="global" ng-init="userType=1;">
+<head>
+  <meta charset="UTF-8">
+  <title>租房客户详情页</title>
+  <meta name="renderer" content="webkit">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+  <link rel="shortcut icon" href="/favicon.ico">
+  <link rel="stylesheet" href="scripts/lib/normalize.css/normalize.css" />
+  <link rel="stylesheet" href="scripts/lib/art-reactor/dist/art-reactor.min.css" />
+  <link rel="stylesheet" href="styles/common.css">
+  <script src="http://vplus.fdc.com.cn/weixinapi/home/GetToken/get_openid/?type=detail"></script>
+</head>
+<body ng-controller="ctrl">
+  <div my-fullscreen = "-74">
+    <div class="title">
+      <h1>租房客户详情页</h1>
+    </div>
+
+    <div class="content-panel group mb10">
+      <div class="box">
+        <p class="head">
+          <!-- <i class="ar ar-user-full" ng-class="personColor"></i>
+        --> <i class="ar ar-user-full" ng-class="statelist[statelist.length - 1].StatusID | getStatusClass:'user'"></i>
+        <span class="text-bigger" ng-bind="entity.CustName"></span>
+        <span class="tag" ng-class="statelist[statelist.length - 1].StatusID | getStatusClass:'tag'"></span>
+      </p>
+      <dl class="cf">
+        <dt>手机号码：</dt>
+        <dd><a ng-href="tel://{{entity.CustPhone}}"><span ng-bind="entity.CustPhone"></span></a></dd>
+      </dl>
+      <dl class="cf">
+        <dt>客户类型：</dt>
+        <dd>
+          房源
+          <span ng-bind="entity.Name"></span>
+        </dd>
+      </dl>
+    </div>
+    <div class="addon-box phone">
+      <i class="ar ar-phone-c co-primary" ng-click="phoneCall(entity.CustPhone)"></i>
+    </div>
+  </div>
+
+  <div class="form form-static mb10">
+    <dl class="cf">
+      <dt>期望区域：</dt>
+      <dd>
+        <span ng-bind="entity.RegionName"></span>
+        <!-- <span ng-bind="entity.DistrictName"></span> -->
+      </dd>
+    </dl>
+    <dl class="cf">
+      <dt>期望街道：</dt>
+      <dd ng-bind="entity.DistrictName"></dd>
+    </dl>
+  </div>
+  <div class="form form-static mb10">
+    <dl class="cf">
+      <dt>期望户型：</dt>
+      <dd><span ng-bind="entity.RoomType"></span>房</dd>
+    </dl>
+    <dl class="cf">
+      <dt>期望租金：</dt>
+      <dd>
+        <span ng-bind="entity.Price"></span>
+        元/月
+      </dd>
+    </dl>
+  </div>
+
+  <div class="content-panel">
+    <p class="text-normal" ng-repeat="state in statelist">
+      <i class="ar ar-flag-angle-full" ng-class="state.StatusID | getStatusClass : 'flag'"></i>
+      <span ng-bind="state.StatusID | getType"></span>
+      <span ng-bind="state.CreateTime | getDate | date:'yyyy-MM-dd HH:mm:ss'"></span>
+    </p>
+  </div>
+</div>
+
+<div class="layout mt20 mb20">
+  <div class="col-12">
+    <a href="myCustomer.html" class="btn btn-primary" style="width: 100%;color:#fff;">返回</a>
+  </div>
+</div>
+
+<my-loading ng-show="isLoading"></my-loading>
+
+<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<script src="scripts/lib/zeptojs/src/zepto.js"></script>
+<script src="scripts/lib/angular/angular.min.js"></script>
+<script src="scripts/module/server.js"></script>
+<script src="scripts/module/global.js"></script>
+<!-- endbuild -->
+<script src="scripts/borrowDetailA.js"></script>
+</body>
+</html>

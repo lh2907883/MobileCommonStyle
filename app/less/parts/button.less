@@ -1,0 +1,52 @@
+/**
+ * 按钮样式
+ */
+.btn{
+  border: 1px solid transparent;
+  border-radius: 2px;
+  vertical-align: middle;
+  text-align: center;
+  display: inline-block;
+  white-space: nowrap;
+  padding: 6px 12px;
+  height: 34px;
+}
+.btn-default{
+  color: @fc-label;
+  border-color: @border-color;
+  background-color: #fff;
+}
+.btn-primary{
+  color: @fc-inColorBtn;
+  background-color: @color-primary;
+}
+.btn-warn{
+  color: @fc-inColorBtn;
+  background-color: @color-warn;
+}
+.btn-inVal{
+  color: @fc-inColorBtn;
+  background-color: @color-inVal;
+}
+/**
+ * 按钮扁平化
+ */
+.flat .btn{
+  border: 0;
+  border-radius: 0;
+}
+
+/**
+ * 圆形删除按钮
+ */
+.button-remove{
+  display: block;
+  border: 1px solid transparent;
+  border-radius: 12px;
+  background-color: #ccc;
+  color: #fff;
+  padding: 4px;
+  cursor: pointer;
+  font-size: 6px;
+  position: absolute;
+}

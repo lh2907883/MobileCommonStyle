@@ -1,0 +1,37 @@
+/*
+ *   author : mby
+ *   date   : 2015/7/22
+ */
+@import "variables.less";
+
+.bg-img{
+  background: url("../images/title-bg.png") no-repeat center #3498db;
+  position: relative;
+  text-align: center;
+  height: 160px;
+  p{
+    display: block;
+    left: 0;
+    right: 0;
+  }
+  p:first-of-type{
+    position: absolute;
+    top: 20px;
+    font-size: 14px;
+    color: #fff;
+  }
+  p:last-of-type{
+    position: absolute;
+    bottom: 10px;
+    font-size: 16px;
+    color: #fff;
+  }
+}
+
+/* subsidys.html */
+.subs-list{
+  overflow-y: auto;
+  .list-item:last-of-type{
+    margin-bottom: 0;
+  }
+}

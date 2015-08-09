@@ -1,0 +1,97 @@
+/**
+ * 面板,左右边距20px
+ */
+.panel{
+  padding: 20px;
+}
+/**
+ * 里面放文字的面板
+ */
+.text-panel{
+  .panel;
+  .bt;
+  .bb;
+  .wbg; 
+}
+
+/**
+ * 里面放图文信息的面板
+ */
+.content-panel{
+  padding: 10px 20px;
+  .bt;
+  .bb;
+  .wbg;
+  .head{
+    line-height: 32px;
+  }
+  dl {
+    line-height: 28px;
+  	dt{
+  	  .f-l;
+  	  color: @fc-label;
+  	}
+  	dd {
+  	  margin-left: 72px;
+  	}
+  }
+  .phone{
+  	padding-left: 20px;
+  	border-left: 1px solid @border-color;
+    i{
+      font-size:32px;
+    }
+  }
+}
+
+/**
+ * 搜索面板
+ */
+.search-panel{
+  .bt;
+  .bb;
+  .wbg;
+  .search{
+    position: relative;
+    .label{
+      padding: 10px 0;
+      .text-center;
+    }
+  }
+  .search+.search{
+    border-left: 1px solid @border-color;
+  }
+}
+
+/**
+ * 我的客户列表面板
+ */
+.list-panel{
+  .bb;
+  .wbg;
+  padding: 0 20px;
+  overflow-y: auto;
+  .list-item{
+    padding-top: 10px;
+    padding-bottom: 10px;
+    .head{
+      line-height: 32px;
+      p{
+        display: inline;
+        .font-size(16);
+      }
+    }
+    table{
+      width: 100%;
+      tr{
+        line-height: 28px;
+      }
+    }
+    .tag+.tag{
+      margin-left: 6px;
+    }
+  }
+  .list-item+.list-item{
+    border-top: 1px solid @border-color;
+  }
+}

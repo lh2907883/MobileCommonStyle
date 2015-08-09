@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="zh" ng-app="app" ng-controller="global" ng-init="userType=1;">
+<head>
+  <meta charset="UTF-8">
+  <title>我的客户</title>
+  <meta name="renderer" content="webkit">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+  <link rel="shortcut icon" href="/favicon.ico">
+  <link rel="stylesheet" href="scripts/lib/normalize.css/normalize.css" />
+  <link rel="stylesheet" href="scripts/lib/art-reactor/dist/art-reactor.min.css" />
+  <link rel="stylesheet" href="styles/common.css">
+  <script src="http://vplus.fdc.com.cn/weixinapi/home/GetToken/get_openid/?type=detail"></script>
+</head>
+<body ng-controller="ctrl">
+  <div class="title">
+    <h1>我的客户</h1>
+  </div>
+
+  <div class="search-panel cf">
+    <div class="search col-6">
+      <div class="label">
+        客户状态-
+        <span ng-bind="state | stateDisplay"></span> <i class="ar ar-angle-down"></i>
+      </div>
+      <select ng-model="state" class="imitate" ng-options="item.id as item.label for item in states"></select>
+    </div>
+    <div class="search col-6">
+      <div class="label">
+        客户类型-
+        <span ng-bind="type | typeDisplay"></span> <i class="ar ar-angle-down"></i>
+      </div>
+      <select ng-model="type" class="imitate" ng-options="item.id as item.label for item in types"></select>
+    </div>
+  </div>
+
+  <div id="listBody" class="list-panel">
+    <div class="list-item" ng-repeat="ent in list" ng-click="getBaseInfo(ent.ID, ent.PropertyID)">
+      <div class="head">
+        <p ng-bind="ent.CustName"></p>
+        <div class="f-r">
+          <span class="tag tag-blue" ng-class="ent.PropertyID | getPropertyType"></span>
+          <span class="tag" ng-class="ent.StatusID | getStatusClass : 'tag'"></span>
+        </div>
+      </div>
+      <table>
+        <tr>
+          <td>
+            信息补助：
+            <span class="co-warn" ng-bind="ent.Infomoneyshow"></span>
+          </td>
+          <td class="text-right">成交补助：<span ng-bind="ent.Dealmoneyshow"></span></td>
+        </tr>
+        <tr>
+          <td>房屋户型：<span ng-bind="ent.RoomInfo"></span></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="layout mt20 mb20">
+    <div class="col-12">
+      <a href="index.html" class="btn btn-primary" style="width: 100%;color:#fff;">返回首页</a>
+    </div>
+  </div>
+
+  <my-loading ng-show="isLoading"></my-loading>
+
+  <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+  <script src="scripts/lib/zeptojs/src/zepto.js"></script>
+  <script src="scripts/lib/angular/angular.min.js"></script>
+  <script src="scripts/module/lazyload.js"></script>
+  <script src="scripts/module/server.js"></script>
+  <script src="scripts/module/global.js"></script>
+  <!-- endbuild -->
+  <script src="scripts/myCustomer.js"></script>
+</body>
+</html>

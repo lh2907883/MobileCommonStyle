@@ -1,0 +1,25 @@
+/**
+ * 自动联想
+ */
+.autocomplete-wrap{
+  position: relative;
+  ul.autocomplete{
+    position: absolute;
+    z-index: 999;
+    width: 100%; 
+    top: 100%;
+    margin-top: 1px;
+    background-color: @autoC-gray-bg; 
+    box-sizing: border-box;
+    li{
+      .font-size(12);
+      padding: 0 10px;
+      text-overflow: ellipsis;
+      overflow: hidden; 
+      white-space:nowrap; 
+      line-height: 26px; 
+      height: 26px;
+      border-bottom: 1px solid @border-color;
+    }
+  }
+}
